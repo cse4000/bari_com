@@ -135,7 +135,7 @@ provinces = [
 	"Rangpur Sadar",
 	"Taraganj",
 	"Dimla",
-    "Domar",
+        "Domar",
 	"Jaldhaka",
 	"Kishoreganj",
 	"Nilphamari Sadar",
