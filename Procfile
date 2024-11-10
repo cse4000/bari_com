@@ -1,0 +1,1 @@
+web: gunicorn bari_com.wsgi --log-file -
