@@ -1,0 +1,119 @@
+{% extends '../base.html' %}
+{% load crispy_forms_tags %}
+{% load custom_tags %}
+
+{% block title %}
+    
+    {% block nav_title %}
+        Deal Detail
+    {% endblock nav_title %}
+        
+{% endblock title %}
+
+
+{% block content %}
+    <div class="container-fluid page-container">
+        <div class="p-3 bg-white rounded mb-3">
+            <h3>Create</h3>
+            <p>{{ now|date:"M d, Y" }}</p>
+        </div>
+        <div class="p-3 bg-white rounded">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row gy-2">
+                    <div class="col-md-4 ">
+                        <div class="col-12">
+                            {{ form.property|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-12">
+                            {{ form.deal_type|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-12">
+                            {{ form.agent|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="col-12">
+                            {{ form.owner|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="col-12">
+                            {{ form.nid|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="col-12">
+                            {{ form.phone1|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="col-12">
+                            {{ form.phone2|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="col-12">
+                            {{ form.address|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="col-12">
+                            {{ form.amount|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="col-12">
+                            {{ form.start_date|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="col-12">
+                            {{ form.end_date|as_crispy_field }}
+                        </div>
+                    </div>
+                        
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var deal_type = document.querySelector('#id_deal_type');
+        var start_date = document.querySelector('#id_start_date');
+        var end_date = document.querySelector('#id_end_date');
+
+        type = deal_type.options[deal_type.selectedIndex].text;
+
+        start_date.disabled = true;
+        end_date.disabled = true;
+
+        if (type == 'Rent'){
+                start_date.disabled = false;
+                end_date.disabled = false;
+            }
+        else{
+            start_date.disabled = true;
+            end_date.disabled = true;
+        }
+
+
+        deal_type.addEventListener('change', function(){
+        type = deal_type.options[deal_type.selectedIndex].text;
+
+            if (type == 'Rent'){
+                start_date.disabled = false;
+                end_date.disabled = false;
+            }
+            else{
+                start_date.disabled = true;
+                end_date.disabled = true;
+            }
+        });
+    </script>
+{% endblock content %}
+    

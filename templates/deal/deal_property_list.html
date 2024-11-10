@@ -1,0 +1,41 @@
+{% extends '../base.html' %}
+{% load custom_tags %}
+
+{% block title %}
+    
+    {% block nav_title %}
+        Choose Property
+    {% endblock nav_title %}
+        
+{% endblock title %}
+
+{% block content %}
+<div class="page-container">
+    <div class="bg-white p-3 rounded overflow-auto">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th colspan="3">#</th>
+                    <th colspan="4">Property</th>
+                    <th colspan="4">Type</th>
+                    <th colspan="4">Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for property in object_list %}
+                    <tr>
+                        <td colspan="3">{{ property.id }}</td>
+                        <td colspan="4">{{ property }}</td>
+                        <td colspan="4">{{ property.type.title }}</td>
+                        <td colspan="4">{{ property.price|format_amount }}</td>
+                        <td colspan="3"><a href="{% url 'accounts:deal_create' property.id %}" class="btn btn-primary">Select</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
+    

@@ -1,0 +1,95 @@
+{% load custom_tags %}
+
+<div class="w-100 row m-0 gap-3 search-sidebar">
+    <div class="bg-white border rounded p-3 col-12">
+        <h4>Properties</h4>
+        {% property_types %}
+    </div>
+    <div class="bg-white border rounded p-3 col-12">
+        <div class="mb-3">
+            <h4>Search Property</h4>
+            
+            {% if request.user.is_authenticated %}
+                {% search_criteria %}
+            {% endif %}
+                
+        </div>
+        <form action="{% url 'property:property_list' %}" method="post">
+            {% csrf_token %}
+            <div class="row gy-4">
+                <div class="col-12">
+                    <label for="">Property Type</label>
+                    <select name="type" id="property_type" class="form-control">
+                        <option value="">All</option>
+                        <option value="Residential">Residential</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Rental">Rental</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label for="">Property City</label>
+                    <input type="text" name="city" id="city" class="form-control">
+                </div>
+                <div class="col-12">
+                    <label for="">Price Range</label>
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="number" name="price_from" id="numberInput" class="form-control" placeholder="From">
+                        </div>
+                        <div class="col-6">
+                            <input type="number" name="price_to" id="numberInput" class="form-control" placeholder="To">
+                        </div>    
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row gy-3">
+                        <div class="col-6">
+                            <label for="">floors</label>
+                            <input type="number" name="floors" id="numberInput" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="">bedrooms</label>
+                            <input type="number" name="bedrooms" id="numberInput" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="">bathrooms</label>
+                            <input type="number" name="bathrooms" id="numberInput" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="">parkings</label>
+                            <input type="number" name="parking" id="numberInput" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for="">Basement</label>
+                            <input type="checkbox" name="basement">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary w-100" name="search">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    const setValue = (element_name, value) => {
+        if (element_name == 'type' && value == null) {
+            value = ''
+        }
+        else if (element_name == 'basement'){
+            if (value == 'Yes'){
+                document.getElementsByName(element_name)[0].checked = true
+            }
+            else {
+                document.getElementsByName(element_name)[0].checked = false
+            }
+            return
+        }
+        // document.getElementByName(element_name).value = value
+        document.getElementsByName(element_name)[0].value = value
+    }
+
+</script>
