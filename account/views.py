@@ -310,7 +310,7 @@ class Register(CreateView):
         to_email = form.cleaned_data.get('email')
         from_email = settings.EMAIL_HOST_USER
         recipient_list = [to_email]
-        text_message = f"Please verify your email address by going to this link http://127.0.0.1:8000/accounts/activate/{data['uid']}/{data['token']}"
+        text_message = f"Please verify your email address by going to this link https://projectbari.pythonanywhere.com/accounts/activate/{data['uid']}/{data['token']}"
         # Create the EmailMultiAlternatives object
         email = EmailMultiAlternatives(
             mail_subject, text_message, from_email, recipient_list
